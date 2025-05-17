@@ -30,10 +30,36 @@ class RouteRequest(BaseModel):
 @app.post("/routes", response_model=List[Dict[str, Any]])
 def get_routes(req: RouteRequest):
     try:
+        # Validate input cities - not equals and not empty
+        if not req.from_city or not req.to_city:
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "resultCode": "0001",
+                    "resultMessage": "Origin and destination cannot be empty",
+                    "data": [],
+                    "totalCarriers": 0
+                }
+            )
+        if req.from_city == req.to_city:
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "resultCode": "0001",
+                    "resultMessage": "Origin and destination must be different",
+                    "data": [],
+                    "totalCarriers": 0
+                }
+            )
+
         # origin - destination
         route_pair = (req.from_city.strip(), req.to_city.strip())
+        route_pair_inverted = (route_pair[1], route_pair[0])
         if route_pair in ROUTES:
             carriers = ROUTES[route_pair]
+            result_message = "Success"
+        elif route_pair_inverted in ROUTES:
+            carriers = ROUTES[route_pair_inverted]
             result_message = "Success"
         else:
             # default route
