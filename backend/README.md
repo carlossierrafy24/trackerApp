@@ -54,7 +54,7 @@ http://127.0.0.1:8000/routes
 ### Remote endpoint
 
 ```bash
-http://127.0.0.1:8000/routes
+https://trackerapp-j7k7.onrender.com/routes
 ```
 
 ### Request body
