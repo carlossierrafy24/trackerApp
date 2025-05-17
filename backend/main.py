@@ -1,0 +1,62 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+from typing import List, Dict, Tuple, Any
+from fastapi.responses import JSONResponse
+
+app = FastAPI()
+
+# Mock data for available routes
+ROUTES: Dict[Tuple[str, str], List[Dict[str, Any]]] = {
+    ("New York", "Washington DC"): [
+        {"name": "Knight-Swift Transport Services", "trucks_per_day": 10},
+        {"name": "J.B. Hunt Transport Services Inc", "trucks_per_day": 7},
+        {"name": "YRC Worldwide", "trucks_per_day": 5},
+    ],
+    ("San Francisco", "Los Angeles"): [
+        {"name": "XPO Logistics", "trucks_per_day": 9},
+        {"name": "Schneider", "trucks_per_day": 6},
+        {"name": "Landstar Systems", "trucks_per_day": 2},
+    ],
+    ("origin", "destination"): [
+        {"name": "UPS Inc.", "trucks_per_day": 11},
+        {"name": "FedEx Corp", "trucks_per_day": 9},
+    ],
+}
+
+class RouteRequest(BaseModel):
+    from_city: str
+    to_city: str
+
+@app.post("/routes", response_model=List[Dict[str, Any]])
+def get_routes(req: RouteRequest):
+    try:
+        # origin - destination
+        route_pair = (req.from_city.strip(), req.to_city.strip())
+        if route_pair in ROUTES:
+            carriers = ROUTES[route_pair]
+            result_message = "Success"
+        else:
+            # default route
+            route_pair = ("origin", "destination")
+            carriers = ROUTES.get(route_pair, [])
+            result_message = "No specific route found, using default route"
+
+        return JSONResponse(
+            status_code=200,
+            content={
+                "resultCode": "0000",
+                "resultMessage": result_message,
+                "data": carriers,
+                "totalCarriers": len(carriers)
+            }
+        )
+    except Exception:
+        return JSONResponse(
+            status_code=500,
+            content={
+                "resultCode": "9999",
+                "resultMessage": "Internal Server Error: {null}",
+                "data": [],
+                "totalCarriers": 0
+            }
+        )
