@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import { useSearchRoutes } from "../hooks/useSearchRoutes";
 import { GoogleMapsComponent } from "./GoogleMaps";
+import "./Components.css"; // Assuming you have a CSS file for styling
 
 export const CityForm = () => {
   const fromRef = useRef<HTMLInputElement | null>(null);
@@ -29,33 +30,44 @@ export const CityForm = () => {
       .trim();
   };
 
+  const resetForm = () => {
+    if (fromRef.current) fromRef.current.value = "";
+    if (toRef.current) toRef.current.value = "";
+    reset();
+  };
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="city-form-container">
+      <form onSubmit={handleSubmit} className="city-form">
         <Autocomplete
           onLoad={(autocomplete) => (fromAutocomplete.current = autocomplete)}
           options={{ types: ["(cities)"] }}
         >
-          <input ref={fromRef} placeholder="From city" />
+          <input ref={fromRef} placeholder="From city" className="city-input" />
         </Autocomplete>
 
         <Autocomplete
           onLoad={(autocomplete) => (toAutocomplete.current = autocomplete)}
           options={{ types: ["(cities)"] }}
         >
-          <input ref={toRef} placeholder="To city" />
+          <input ref={toRef} placeholder="To city" className="city-input" />
         </Autocomplete>
 
         <button className="search-button" type="submit">
           Search
         </button>
       </form>
+
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {carriers.length > 0 && !loading && (
-        <div>
-          <h2>Carriers Found: {totalCarriers}</h2>
-          <button onClick={reset}>Reset</button>
+        <div className="map-container">
+          <h2 className="results-header">
+            Carriers Found: {totalCarriers}
+            <button onClick={resetForm} className="reset-button">
+              Reset search
+            </button>
+          </h2>
           <GoogleMapsComponent
             origin={fromRef.current?.value || ""}
             destination={toRef.current?.value || ""}
