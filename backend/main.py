@@ -7,8 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 origins = [
     "http://localhost:5173",  # Vite
     "http://localhost:3000",  # React por defecto
-    'https://home-take-trackerapp.web.app/', # Firebase Hosting
-    'https://home-take-trackerapp.firebaseapp.com/', # Firebase Hosting
+    'https://home-take-trackerapp.web.app', # Firebase Hosting
+    'https://home-take-trackerapp.firebaseapp.com', # Firebase Hosting
 ]
 
 app = FastAPI()
