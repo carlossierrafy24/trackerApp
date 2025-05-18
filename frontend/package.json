@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start:prod": "vite preview --port 4173"
+    "start:prod": "vite preview --port 4173",
+    "deploy": "npm run clean-public && npm run build && cp -R dist/* public/ && firebase deploy",
+    "clean-public": "rm -rf public && mkdir public"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.20.6",
