@@ -65,7 +65,7 @@ This document includes the architecture and main components of the TrackerApp lo
 8 directories, 26 files
 ```
 
-## Backend (FastAPI)
+### Backend (FastAPI)
 
 ### Base endponit
 
