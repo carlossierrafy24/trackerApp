@@ -1,4 +1,3 @@
-import React from "react";
 import type { Carrier } from "../types/RequestResponse";
 import "./Components.css"; // importa los estilos
 

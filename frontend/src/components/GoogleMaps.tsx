@@ -35,7 +35,16 @@ export const GoogleMapsComponent = ({
   }, [origin, destination]);
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "400px" }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "600px",
+        borderRadius: "0px 0px 8px 8px",
+        overflow: "hidden",
+        boxShadow: "0 2px 8px rgba(0, 0, 0, 0.25)",
+      }}
+    >
       <GoogleMap
         center={{ lat: 39.8283, lng: -98.5795 }}
         zoom={5}
