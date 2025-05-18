@@ -22,7 +22,7 @@ export const useSearchRoutes = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`Server responded with ${response.status}`);
+        throw new Error("Check the data and try again");
       }
 
       const data: RouteResponse = await response.json();
