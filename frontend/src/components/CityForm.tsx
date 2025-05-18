@@ -4,11 +4,6 @@ import { useSearchRoutes } from "../hooks/useSearchRoutes";
 import Results from "./Results";
 import { GoogleMapsComponent } from "./GoogleMaps";
 
-export interface Carrier {
-  name: string;
-  trucks_per_day: number;
-}
-
 export const CityForm = () => {
   const fromRef = useRef<HTMLInputElement | null>(null);
   const toRef = useRef<HTMLInputElement | null>(null);

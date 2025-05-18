@@ -1,4 +1,4 @@
-import type { Carrier } from "./CityForm";
+import type { Carrier } from "../types/RequestResponse";
 
 const Results = ({ carriers }: { carriers: Carrier[] }) => (
   <ul>
