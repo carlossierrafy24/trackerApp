@@ -29,6 +29,7 @@ export const GoogleMapsComponent = ({
           setDirections(result);
         } else {
           console.error("Error getting route:", status);
+          setDirections(null);
         }
       }
     );
