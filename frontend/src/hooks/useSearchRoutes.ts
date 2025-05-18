@@ -1,12 +1,10 @@
 import { useReducer } from "react";
+import { searchRoutesReducer } from "../reducers/searchRoutesReducer";
 import {
-  searchRoutesReducer,
   initialState,
-} from "../reducers/searchRoutesReducer";
-import type {
-  RouteParams,
-  RouteResponse,
-} from "../reducers/searchRoutesReducer";
+  type RouteParams,
+  type RouteResponse,
+} from "../types/RequestResponse";
 
 export const useSearchRoutes = () => {
   const [state, dispatch] = useReducer(searchRoutesReducer, initialState);
