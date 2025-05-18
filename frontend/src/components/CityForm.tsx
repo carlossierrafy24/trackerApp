@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import { useSearchRoutes } from "../hooks/useSearchRoutes";
+import Results from "./Results";
+import { GoogleMapsComponent } from "./GoogleMaps";
 
 export interface Carrier {
   name: string;
@@ -54,16 +56,17 @@ export const CityForm = () => {
       </form>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      {totalCarriers > 0 && carriers.length > 0 && (
-        <ul>
-          {carriers.map((carrier, index) => (
-            <li key={index}>
-              {carrier.name} - {carrier.trucks_per_day} trucks/day
-            </li>
-          ))}
-        </ul>
+      {carriers.length > 0 && !loading && (
+        <div>
+          <h2>Carriers Found: {totalCarriers}</h2>
+          <Results carriers={carriers} />
+          <button onClick={reset}>Reset</button>
+          <GoogleMapsComponent
+            origin={fromRef.current?.value || ""}
+            destination={toRef.current?.value || ""}
+          />
+        </div>
       )}
-      {totalCarriers > 0 && <button onClick={reset}>Reset search</button>}
     </div>
   );
 };
