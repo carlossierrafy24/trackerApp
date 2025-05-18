@@ -2,8 +2,22 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List, Dict, Tuple, Any
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = [
+    "http://localhost:5173",  # Vite
+    "http://localhost:3000",  # React por defecto
+]
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Mock data for available routes
 ROUTES: Dict[Tuple[str, str], List[Dict[str, Any]]] = {
