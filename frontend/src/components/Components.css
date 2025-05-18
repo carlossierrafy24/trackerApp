@@ -118,3 +118,22 @@
     width: 100%;
   }
 }
+/* Header */
+.app-header {
+  background-color: #2463eb;
+  color: white;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
