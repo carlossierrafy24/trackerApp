@@ -1,12 +1,17 @@
 import { GoogleMap, DirectionsRenderer } from "@react-google-maps/api";
 import { useState, useEffect } from "react";
-
+import Results from "./Results";
 interface Props {
-  origin: string;
-  destination: string;
+  origin: google.maps.LatLng | google.maps.LatLngLiteral | string;
+  destination: google.maps.LatLng | google.maps.LatLngLiteral | string;
+  carriers: { name: string; trucks_per_day: number }[];
 }
 
-export const GoogleMapsComponent = ({ origin, destination }: Props) => {
+export const GoogleMapsComponent = ({
+  origin,
+  destination,
+  carriers,
+}: Props) => {
   const [directions, setDirections] =
     useState<google.maps.DirectionsResult | null>(null);
 
@@ -30,12 +35,15 @@ export const GoogleMapsComponent = ({ origin, destination }: Props) => {
   }, [origin, destination]);
 
   return (
-    <GoogleMap
-      center={{ lat: 39.8283, lng: -98.5795 }}
-      zoom={5}
-      mapContainerStyle={{ width: "100%", height: "400px" }}
-    >
-      {directions && <DirectionsRenderer directions={directions} />}
-    </GoogleMap>
+    <div style={{ position: "relative", width: "100%", height: "400px" }}>
+      <GoogleMap
+        center={{ lat: 39.8283, lng: -98.5795 }}
+        zoom={5}
+        mapContainerStyle={{ width: "100%", height: "100%" }}
+      >
+        {directions && <DirectionsRenderer directions={directions} />}
+      </GoogleMap>
+      <Results carriers={carriers} total={carriers.length} />
+    </div>
   );
 };

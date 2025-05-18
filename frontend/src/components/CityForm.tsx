@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import { useSearchRoutes } from "../hooks/useSearchRoutes";
-import Results from "./Results";
 import { GoogleMapsComponent } from "./GoogleMaps";
 
 export const CityForm = () => {
@@ -47,18 +46,20 @@ export const CityForm = () => {
           <input ref={toRef} placeholder="To city" />
         </Autocomplete>
 
-        <button type="submit">Search</button>
+        <button className="search-button" type="submit">
+          Search
+        </button>
       </form>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       {carriers.length > 0 && !loading && (
         <div>
           <h2>Carriers Found: {totalCarriers}</h2>
-          <Results carriers={carriers} />
           <button onClick={reset}>Reset</button>
           <GoogleMapsComponent
             origin={fromRef.current?.value || ""}
             destination={toRef.current?.value || ""}
+            carriers={carriers}
           />
         </div>
       )}
