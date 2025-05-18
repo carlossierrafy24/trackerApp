@@ -31,7 +31,7 @@ export const CityForm = () => {
   const cleanCityName = (input: string): string => {
     return input
       .split(",")[0]
-      .replace(/\.-(){}[]'"<>/g, "")
+      .replace(/[.\-{}[\]'"<>]/g, "")
       .trim();
   };
 
