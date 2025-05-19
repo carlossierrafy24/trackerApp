@@ -4,7 +4,13 @@ This document includes the architecture and main components of the TrackerApp lo
 
 ## 2. System Overview
 
-| Browser ↔️ Frontend (React.js) ↔️ Backend (FastAPI) |
+## 2.1 Platform schema
+
+![Platform schema](./frontend/src/assets/diagram1.png)
+
+## 2.2 Information flow schema
+
+![Platform schema](./frontend/src/assets/diagram2.png)
 
 ### Frontend
 
