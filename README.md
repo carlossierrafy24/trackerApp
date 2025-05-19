@@ -117,7 +117,7 @@ The schema is designed to manage logistics data, focusing on cities, carriers (t
 ### Schema
 
 ```bash
-genlogs
+magiclogs
 │
 ├── cities
 ├── carriers
